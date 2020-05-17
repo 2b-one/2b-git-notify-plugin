@@ -1,0 +1,27 @@
+{namespace twoBNotifier.admin}
+
+/**
+ * @param defaultHost
+ */
+{template .settings}
+    <html>
+        <head>
+            <meta name="decorator" content="atl.admin">
+            <meta name="activeTab" content="twoBNotifier-admin-tab">
+            <title>2B Slack Bot Notifier Settings</title>
+        </head>
+        <body>
+            <h2 class="page-panel-content-header">2B Slack Bot Settings</h2>
+            <form class="aui" id="settings-form" method="POST" target="ifrm1">
+                <div class="field-group">
+                    <label for="text-input">Host</label>
+                    <input class="text" type="text" id="text-input" name="host" value="{$defaultHost}" />
+                </div>
+                <div class="buttons-container">
+                    <button id="submit-button" class="aui-button aui-button-primary">Save</button>
+                </div>
+                <iframe id="ifrm1" name="ifrm1" style="display:none"></iframe>
+            </form>
+        </body>
+    </html>
+{/template}

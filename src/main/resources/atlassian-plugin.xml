@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/pluginIcon.png</param>  
+    <param name="plugin-logo">images/pluginLogo.png</param> 
+  </plugin-info>
+
+  <resource type="i18n" name="i18n" location="2b-git-notify-plugin"/>
+
+  <repository-hook key="2bNotifierHook" name="2B Bot Hook" class="bean:twoBNotifierRepositoryHook"> 
+    <scopes> 
+      <scope>project</scope>  
+      <scope>repository</scope> 
+    </scopes> 
+  </repository-hook>
+
+  <client-resource key="twoBNotifier-admin-soy" name="2B Notifier Admin Soy"> 
+    <directory location="/templates/"/>  
+    <dependency>com.atlassian.bitbucket.server.bitbucket-web:global</dependency>  
+    <dependency>com.atlassian.bitbucket.server.bitbucket-web:server-soy-templates</dependency> 
+  </client-resource>
+
+  <web-item name="2B Slack Bot Settings" key="twoBNotifier-admin-tab" section="atl.admin/admin-plugins-section" weight="30"> 
+    <label>2B Slack Bot Settings</label>  
+    <link linkId="reminder-config-link">/plugins/servlet/notifier</link>
+  </web-item>
+
+  <web-resource key="2b-settings-form" name="2B Settings Form">
+    <resource name="index.js" type="download" location="/2b-settings/index.js" />
+    <dependecy>com.atlassian.auiplugin:aui-forms</dependecy>
+    <dependecy>com.atlassian.auiplugin:aui-button</dependecy>
+  </web-resource>
+
+  <servlet name="Two B Notifier Servlet" i18n-name-key="two-b-notifier-servlet.name" key="two-b-notifier-servlet" class="com.acme.bitbucket.notify.servlet.TwoBNotifierServlet"> 
+    <description key="two-b-notifier-servlet.description">The Two B Notifier Servlet Plugin</description>  
+    <url-pattern>/notifier*</url-pattern>
+  </servlet>
+
+</atlassian-plugin>
